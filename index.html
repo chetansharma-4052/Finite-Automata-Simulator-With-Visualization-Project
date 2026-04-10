@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finite Automata Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Finite Automata Simulator</h1>
+            <p>Design and simulate DFA and NFA step-by-step.</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Column: Design & Transitions -->
+            <div class="left-panel">
+                <section class="card" id="design-panel">
+                    <h2>1. Automata Design</h2>
+
+                    <div class="form-group">
+                        <label for="states-input">States (comma separated, e.g., q0,q1):</label>
+                        <input type="text" id="states-input" placeholder="q0, q1, q2">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start-state-input">Start State:</label>
+                            <input type="text" id="start-state-input" placeholder="q0">
+                        </div>
+                        <div class="form-group">
+                            <label for="accept-states-input">Accept States (comma separated):</label>
+                            <input type="text" id="accept-states-input" placeholder="q2">
+                        </div>
+                    </div>
+
+                    <button class="btn primary" id="save-design-btn">Set Design</button>
+                    <div id="design-status" class="status-msg"></div>
+                </section>
+
+                <section class="card" id="transition-panel">
+                    <h2>2. Transitions</h2>
+                    <div class="transition-form">
+                        <input type="text" id="trans-from" placeholder="From (e.g. q0)">
+                        <input type="text" id="trans-symbol" placeholder="Symbol (e.g. a)">
+                        <button class="btn epsilon-btn" id="epsilon-btn" title="Insert epsilon (ε)" style="display:none;">ε</button>
+                        <input type="text" id="trans-to" placeholder="To (e.g. q1)">
+                        <button class="btn secondary" id="add-trans-btn">Add</button>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="transition-table">
+                            <thead>
+                                <tr>
+                                    <th>From State</th>
+                                    <th>Symbol</th>
+                                    <th>To State</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transition-body">
+                                <!-- Transitions go here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Simulation & Output -->
+            <div class="right-panel">
+                <section class="card" id="simulation-panel">
+                    <h2>3. Simulation</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="automata-mode">Mode:</label>
+                            <select id="automata-mode">
+                                <option value="DFA">DFA</option>
+                                <option value="NFA">NFA</option>
+                            </select>
+                        </div>
+                        <div class="form-group flex-grow">
+                            <label for="input-string">Input String:</label>
+                            <input type="text" id="input-string" placeholder="e.g. abba">
+                        </div>
+                    </div>
+
+                    <div class="button-group" style="align-items: center; gap: 10px;">
+                        <button class="btn primary" id="simulate-btn">Simulate</button>
+                        <button class="btn secondary" id="reset-sim-btn">Clear Output</button>
+
+                        <div style="margin-left: auto; display: flex; gap: 10px; align-items: center;">
+                            <select id="example-select">
+                                <option value="dfa1">DFA: Language containing 'ab'</option>
+                                <option value="nfa1">NFA: Language ending with '01'</option>
+                            </select>
+                            <button class="btn outline" id="load-example-btn">Load</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card" id="output-panel">
+                    <h2>4. Output Trace</h2>
+                    <div class="trace-container" id="trace-container">
+                        <p class="placeholder-text">Run simulation to see step-by-step trace here.</p>
+                    </div>
+                    <div id="final-result" class="final-result hidden">
+                        <!-- Result shows here -->
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section class="card" id="graph-panel" style="margin-top: 20px;">
+            <h2>Visual Simulator Graph</h2>
+            <div id="cy"
+                style="width: 100%; height: 450px; border: 1px solid var(--border-color); border-radius: 8px; background-color: #fafafa;">
+            </div>
+        </section>
+    </div>
+    <script src="scritp.js"></script>
+</body>
+
+</html>
